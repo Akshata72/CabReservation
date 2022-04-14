@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cabreservation", "Cabreservation\Cabreservation.csproj", "{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{70657F7C-7A1B-4A29-AB00-A277677413EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70657F7C-7A1B-4A29-AB00-A277677413EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70657F7C-7A1B-4A29-AB00-A277677413EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70657F7C-7A1B-4A29-AB00-A277677413EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70657F7C-7A1B-4A29-AB00-A277677413EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B9B28D9-BA55-4360-AB84-DF4BD8D06D8F}
+	EndGlobalSection
+EndGlobal
