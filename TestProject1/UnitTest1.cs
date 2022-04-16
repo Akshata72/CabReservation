@@ -7,10 +7,12 @@ namespace Cabreservation
     public class Tests
     {
         InvoiceGenerator invoiceGenerator;
+        RideRepository rideRepository;
         [SetUp]
         public void Setup()
         {
             invoiceGenerator = new InvoiceGenerator();
+            rideRepository = new RideRepository();
         }
         /// <summary>
         /// Total Fare For Single Ride..
@@ -59,6 +61,21 @@ namespace Cabreservation
             rides.Add(ride2);
 
             Assert.AreEqual(56, invoiceGenerator.TotalFareForMultipleRides(rides));
+            Assert.AreEqual(28, invoiceGenerator.averagePerRide);
+            Assert.AreEqual(2, invoiceGenerator.numOfRides);
+        }
+        /// <summary>
+        /// For Valid User ID
+        /// </summary>
+        [Test]
+        public void GivenValidUserID_GenerateInvoice()
+        {
+            Ride ride1 = new Ride(3, 4);
+            Ride ride2 = new Ride(2, 2);
+
+            rideRepository.AddRideRepository("XYZ", ride1);
+            rideRepository.AddRideRepository("XYZ", ride2);
+            Assert.AreEqual(56, invoiceGenerator.TotalFareForMultipleRides(rideRepository.returnListByUserID("XYZ")));
             Assert.AreEqual(28, invoiceGenerator.averagePerRide);
             Assert.AreEqual(2, invoiceGenerator.numOfRides);
         }

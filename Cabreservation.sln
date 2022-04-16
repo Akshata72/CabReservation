@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cabreservation", "Cabreservation\Cabreservation.csproj", "{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cabreservation", "Cabreservation\Cabreservation.csproj", "{BC10C3F3-8641-4C2A-8C09-BBEF14FE2F36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{70657F7C-7A1B-4A29-AB00-A277677413EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{70657F7C-7A1B-4A29-AB00-A277677413EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
