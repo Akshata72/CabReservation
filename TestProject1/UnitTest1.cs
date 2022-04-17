@@ -7,11 +7,13 @@ namespace Cabreservation
     public class Tests
     {
         InvoiceGenerator invoiceGenerator;
+        premiumInvoiceGenerator premiumInvoiceGenerator;
         RideRepository rideRepository;
         [SetUp]
         public void Setup()
         {
             invoiceGenerator = new InvoiceGenerator();
+            premiumInvoiceGenerator = new premiumInvoiceGenerator();
             rideRepository = new RideRepository();
         }
         /// <summary>
@@ -88,6 +90,86 @@ namespace Cabreservation
             rideRepository.AddRideRepository("XYZ", ride1);
             rideRepository.AddRideRepository("XYZ", ride2);
             CabException cabException = Assert.Throws<CabException>(() => invoiceGenerator.TotalFareForMultipleRides(rideRepository.returnListByUserID("ABC")));
+            Assert.AreEqual(cabException.type, CabException.ExceptionType.INVALID_USER_ID);
+        }
+
+        /// <summary>
+        /// UC4- Premium Ride
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <param name="time"></param>
+        [Test]
+        [TestCase(5, 3)]
+        public void GivenPremiumTimeAndDistance_CalculateFare(double distance, double time)
+        {
+            Ride ride = new Ride(distance, time);
+            int expected = 81;
+            Assert.AreEqual(expected, premiumInvoiceGenerator.TotalFareForSingleRide(ride));
+        }
+        /// <summary>
+        /// Invalid Distance for premium
+        /// </summary>
+        [Test]
+        public void GivenPremiumInvaliDistance_ThrowException()
+        {
+            Ride ride = new Ride(-5, 1);
+            CabException cabException = Assert.Throws<CabException>(() => premiumInvoiceGenerator.TotalFareForSingleRide(ride));
+            Assert.AreEqual(cabException.type, CabException.ExceptionType.INVALID_DISTANCE);
+        }
+        /// <summary>
+        /// Invalid Time for premium
+        /// </summary>
+        [Test]
+        public void GivenPremiumInvalidTime_ThrowException()
+        {
+            Ride ride = new Ride(1, -4);
+            CabException cabException = Assert.Throws<CabException>(() => premiumInvoiceGenerator.TotalFareForSingleRide(ride));
+            Assert.AreEqual(cabException.type, CabException.ExceptionType.INVALID_TIME);
+        }
+        /// <summary>
+        /// Premium Total Fare For Multiple Rides..
+        /// </summary>
+        [Test]
+        public void GivenPremiumListOfRides_GenerateInvoice()
+        {
+            Ride ride1 = new Ride(3, 4);
+            Ride ride2 = new Ride(2, 2);
+
+            List<Ride> rides = new List<Ride>();
+            rides.Add(ride1);
+            rides.Add(ride2);
+
+            Assert.AreEqual(87, premiumInvoiceGenerator.TotalFareForMultipleRides(rides));
+            Assert.AreEqual(43.5d, premiumInvoiceGenerator.averagePerRide);
+            Assert.AreEqual(2, premiumInvoiceGenerator.numOfRides);
+        }
+        /// <summary>
+        /// Premium For Valid User ID
+        /// </summary>
+        [Test]
+        public void GivenPremiumValidUserID_GenerateInvoice()
+        {
+            Ride ride1 = new Ride(3, 4);
+            Ride ride2 = new Ride(2, 2);
+
+            rideRepository.AddRideRepository("XYZ", ride1);
+            rideRepository.AddRideRepository("XYZ", ride2);
+            Assert.AreEqual(87, premiumInvoiceGenerator.TotalFareForMultipleRides(rideRepository.returnListByUserID("XYZ")));
+            Assert.AreEqual(43.5d, premiumInvoiceGenerator.averagePerRide);
+            Assert.AreEqual(2, premiumInvoiceGenerator.numOfRides);
+        }
+        /// <summary>
+        /// Premium Invalid UserId Generate Invoice..
+        /// </summary>
+        [Test]
+        public void GivenPremiumInvalidUserID_GenerateInvoice()
+        {
+            Ride ride1 = new Ride(3, 4);
+            Ride ride2 = new Ride(2, 2);
+
+            rideRepository.AddRideRepository("XYZ", ride1);
+            rideRepository.AddRideRepository("XYZ", ride2);
+            CabException cabException = Assert.Throws<CabException>(() => premiumInvoiceGenerator.TotalFareForMultipleRides(rideRepository.returnListByUserID("ABC")));
             Assert.AreEqual(cabException.type, CabException.ExceptionType.INVALID_USER_ID);
         }
     }
