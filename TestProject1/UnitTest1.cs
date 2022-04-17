@@ -79,5 +79,16 @@ namespace Cabreservation
             Assert.AreEqual(28, invoiceGenerator.averagePerRide);
             Assert.AreEqual(2, invoiceGenerator.numOfRides);
         }
+        [Test]
+        public void GivenInvalidUserID_GenerateInvoice()
+        {
+            Ride ride1 = new Ride(3, 4);
+            Ride ride2 = new Ride(2, 2);
+
+            rideRepository.AddRideRepository("XYZ", ride1);
+            rideRepository.AddRideRepository("XYZ", ride2);
+            CabException cabException = Assert.Throws<CabException>(() => invoiceGenerator.TotalFareForMultipleRides(rideRepository.returnListByUserID("ABC")));
+            Assert.AreEqual(cabException.type, CabException.ExceptionType.INVALID_USER_ID);
+        }
     }
 }
